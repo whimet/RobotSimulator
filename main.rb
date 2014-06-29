@@ -7,16 +7,18 @@ puts 'Example input and output:'
   spec/fixtures/input2.txt
   spec/fixtures/input3.txt
 ).each do |filename|
+  puts ''
   robot = Robot.new(Table.new(5, 5))
 
   File.new(filename).each do |line|
+    puts line
     result = line.match /PLACE (\d),(\d),(\w+)/
 
     if result
       robot.place(result[1].to_i, result[2].to_i, result[3].to_sym)
 
     elsif line =~ /REPORT/
-      puts "#{filename}: #{robot.report}"
+      puts "Output: #{robot.report}"
 
     else
       robot.send line.strip.downcase.to_sym
